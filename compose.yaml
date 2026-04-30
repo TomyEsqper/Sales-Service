@@ -1,7 +1,8 @@
-﻿services:
-  cundropshipping-order:
-    image: cundropshipping-order
+services:
+  sales-service:
+    image: sales-service
     build:
       context: .
-      dockerfile: CunDropShipping-Order/Dockerfile
+      dockerfile: Sales-Service/Dockerfile
+
 
