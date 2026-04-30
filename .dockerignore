@@ -1,7 +1,10 @@
-﻿**/.dockerignore
+**/.dockerignore
 **/.env
 **/.git
 **/.gitignore
+**/.agents
+**/.claude
+**/.junie
 **/.project
 **/.settings
 **/.toolstarget
@@ -21,5 +24,6 @@
 **/obj
 **/secrets.dev.yaml
 **/values.dev.yaml
+skills-lock.json
 LICENSE
 README.md
