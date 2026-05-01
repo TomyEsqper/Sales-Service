@@ -9,5 +9,9 @@ public interface IInfrastructureMapper
     OrderEntity ToInfrastructureOrder(DomainOrderEntity domainOrder);
     List<OrderEntity> ToInfrastructureOrderList(List<DomainOrderEntity> domainOrders);
     DomainOrderEntity ToDomainOrder(OrderEntity orderEntity);
+    
+    PaymentEntity ToInfrastructurePayment(DomainPaymentEntity domainPayment);
+    DomainPaymentEntity ToDomainPayment(PaymentEntity paymentEntity);
 }
+
 

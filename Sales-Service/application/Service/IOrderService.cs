@@ -6,7 +6,7 @@ namespace Sales_Service.application.Service;
 public interface IOrderService
 {
     List<DomainOrderEntity> GetAllOrders();
-    DomainOrderEntity? GetOrderById(int id);
+    DomainOrderEntity GetOrderById(Guid id);
     DomainOrderEntity CreateOrder(DomainOrderEntity order);
 }
 

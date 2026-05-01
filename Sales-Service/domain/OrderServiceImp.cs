@@ -19,7 +19,7 @@ public class OrderServiceImp : IOrderService
         return _repository.GetAllOrders();
     }
 
-    public DomainOrderEntity? GetOrderById(int id)
+    public DomainOrderEntity? GetOrderById(Guid id)
     {
         return _repository.GetOrderById(id);
     }

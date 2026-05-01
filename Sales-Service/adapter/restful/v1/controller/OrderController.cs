@@ -1,8 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
 using Sales_Service.application.Service;
 using Sales_Service.adapter.restful.v1.controller.Mapper;
 using Sales_Service.adapter.restful.v1.controller.Entity;
-using System.Collections.Generic;
 
 namespace Sales_Service.adapter.restful.v1.controller;
 
@@ -28,7 +29,7 @@ public class OrderController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public ActionResult<AdapterOrderEntity> GetById(int id)
+    public ActionResult<AdapterOrderEntity> GetById(Guid id) // <-- Cambiado a Guid
     {
         var domain = _orderService.GetOrderById(id);
         if (domain == null) return NotFound();
@@ -42,7 +43,8 @@ public class OrderController : ControllerBase
         var domain = _adapterMapper.ToDomainOrder(order);
         var created = _orderService.CreateOrder(domain);
         var adapterResult = _adapterMapper.ToAdapterOrder(created);
-        return CreatedAtAction(nameof(GetById), new { id = adapterResult.Id }, adapterResult);
+        
+        // <-- Cambiado adapterResult.Id por adapterResult.OrderId
+        return CreatedAtAction(nameof(GetById), new { id = adapterResult.OrderId }, adapterResult); 
     }
 }
-

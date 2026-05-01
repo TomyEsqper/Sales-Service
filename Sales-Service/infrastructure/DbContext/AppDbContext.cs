@@ -12,6 +12,7 @@ public class AppDbContext : Microsoft.EntityFrameworkCore.DbContext
     public DbSet<OrderEntity> Orders { get; set; } = null!;
     public DbSet<PaymentEntity> Payments { get; set; } = null!;
     public DbSet<DeliveryEntity> Deliveries { get; set; } = null!;
+    
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

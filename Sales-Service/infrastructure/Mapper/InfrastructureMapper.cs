@@ -8,13 +8,17 @@ public class InfrastructureMapper : IInfrastructureMapper
 {
     public OrderEntity ToInfrastructureOrder(DomainOrderEntity domainOrder)
     {
-        // Asumimos domainOrder no nulo en uso normal
+        if (domainOrder == null) return null!;
+
         return new OrderEntity
         {
-            Id = domainOrder.Id,
+            OrderId = domainOrder.OrderId,
             OrderDate = domainOrder.OrderDate,
-            Total = domainOrder.Total,
-            IdUser = domainOrder.IdUser
+            TotalAmount = domainOrder.TotalAmount,
+            BuyerId = domainOrder.BuyerId,
+            PaymentStatus = domainOrder.PaymentStatus,
+            EscrowStatus = domainOrder.EscrowStatus,
+            Version = domainOrder.Version
         };
     }
 
@@ -22,6 +26,7 @@ public class InfrastructureMapper : IInfrastructureMapper
     {
         var list = new List<OrderEntity>();
         if (domainOrders == null) return list;
+        
         foreach (var d in domainOrders)
         {
             list.Add(ToInfrastructureOrder(d));
@@ -31,13 +36,47 @@ public class InfrastructureMapper : IInfrastructureMapper
 
     public DomainOrderEntity ToDomainOrder(OrderEntity orderEntity)
     {
-        // Asumimos orderEntity no nulo en uso normal
+        if (orderEntity == null) return null!;
+
         return new DomainOrderEntity
         {
-            Id = orderEntity.Id,
+            OrderId = orderEntity.OrderId,
             OrderDate = orderEntity.OrderDate,
-            Total = orderEntity.Total,
-            IdUser = orderEntity.IdUser
+            TotalAmount = orderEntity.TotalAmount,
+            BuyerId = orderEntity.BuyerId,
+            PaymentStatus = orderEntity.PaymentStatus,
+            EscrowStatus = orderEntity.EscrowStatus,
+            Version = orderEntity.Version
+        };
+    }
+    
+    public PaymentEntity ToInfrastructurePayment(DomainPaymentEntity domain)
+    {
+        if (domain == null) return null!;
+        return new PaymentEntity
+        {
+            PaymentId = domain.PaymentId,
+            OrderId = domain.OrderId,
+            PaymentProvider = domain.PaymentProvider,
+            TransactionReference = domain.TransactionReference,
+            AmountPaid = domain.AmountPaid,
+            PaymentDate = domain.PaymentDate,
+            Status = domain.Status
+        };
+    }
+
+    public DomainPaymentEntity ToDomainPayment(PaymentEntity entity)
+    {
+        if (entity == null) return null!;
+        return new DomainPaymentEntity
+        {
+            PaymentId = entity.PaymentId,
+            OrderId = entity.OrderId,
+            PaymentProvider = entity.PaymentProvider,
+            TransactionReference = entity.TransactionReference,
+            AmountPaid = entity.AmountPaid,
+            PaymentDate = entity.PaymentDate,
+            Status = entity.Status
         };
     }
 }

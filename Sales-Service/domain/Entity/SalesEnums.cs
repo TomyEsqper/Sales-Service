@@ -22,3 +22,19 @@ public enum DeliveryStatus
     DELIVERED,
     RETURNED
 }
+
+public enum OrderPaymentStatus
+{
+    PENDING,
+    PAID,
+    CANCELLED,
+    REFUNDED
+}
+
+public enum EscrowStatus
+{
+    PENDING,
+    HELD,
+    RELEASED,
+    REFUNDED
+}
