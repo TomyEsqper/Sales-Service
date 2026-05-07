@@ -28,4 +28,20 @@ public class PaymentController : ControllerBase
         
         return Ok(adapterResult); 
     }
+    
+    
+    /// <summary>
+    /// Obtiene un pago por su ID
+    /// </summary>
+    [HttpGet("{id}")]
+    public ActionResult<AdapterPaymentEntity> GetPaymentById(Guid id)
+    {
+        // Llamamos al servicio para obtener el pago
+        var domain = _paymentService.GetPaymentById(id);
+        if (domain == null) return NotFound();
+    
+        // Convertimos de Domain a Adapter usando el mapper
+        var adapter = _adapterMapper.ToAdapterPayment(domain);
+        return Ok(adapter);
+    }
 }

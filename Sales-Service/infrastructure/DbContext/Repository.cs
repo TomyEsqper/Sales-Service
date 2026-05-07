@@ -54,4 +54,37 @@ public class Repository
         
         return _mapper.ToDomainPayment(entity);
     }
+
+    public DomainPaymentEntity GetPaymentById(Guid id)
+    {
+        // Buscamos el pago en la BD por su ID
+        var entity = _context.Payments.FirstOrDefault(p => p.PaymentId == id);
+        if (entity == null) return null!;
+
+        // Convertimos de Infrastructure a Domain usando el mapper
+        return _mapper.ToDomainPayment(entity);
+    }
+
+    public DomainOrderDetailEntity GetOrderDetailById(int id)
+    {
+        var entity = _context.OrderDetails.FirstOrDefault(od => od.OrderDetailId == id);
+        if (entity == null) return null!;
+        
+        return _mapper.ToDomainOrderDetail(entity);
+    }
+    
+    public List<DomainOrderDetailEntity> GetOrderDetailsByOrderId(Guid orderId)
+    {
+        // Buscamos todos los detalles de una orden específica
+        var entities = _context.OrderDetails
+            .Where(od => od.OrderId == orderId)
+            .ToList();
+    
+        var list = new List<DomainOrderDetailEntity>();
+        foreach (var e in entities)
+        {
+            list.Add(_mapper.ToDomainOrderDetail(e));
+        }
+        return list;
+    }
 }

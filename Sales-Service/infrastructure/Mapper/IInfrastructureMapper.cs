@@ -12,6 +12,8 @@ public interface IInfrastructureMapper
     
     PaymentEntity ToInfrastructurePayment(DomainPaymentEntity domainPayment);
     DomainPaymentEntity ToDomainPayment(PaymentEntity paymentEntity);
+    
+    DomainOrderDetailEntity ToDomainOrderDetail(OrderDetailEntity entity);
 }
 
 

@@ -20,6 +20,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 // Register Dependencies
 builder.Services.AddScoped<IOrderService, OrderServiceImp>();
+builder.Services.AddScoped<IPaymentService, PaymentServiceImp>();
+builder.Services.AddScoped<IOrderDetailsService, OrderDetailsServiceImp>();
 builder.Services.AddScoped<Repository>();
 // Register the RESTful mapper implementation
 builder.Services.AddScoped<IAdapterMapper, AdapterMapper>();
@@ -39,4 +41,3 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
-

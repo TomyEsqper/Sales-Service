@@ -18,4 +18,10 @@ public class PaymentServiceImp : IPaymentService
         // Aquí en el futuro puedes agregar lógica de validación (ej. verificar si la orden ya está pagada)
         return _repository.CreatePayment(payment);
     }
+
+
+    public DomainPaymentEntity GetPaymentById(Guid id)  // ← NUEVO MÉTODO
+    {
+        return _repository.GetPaymentById(id);
+    }
 }

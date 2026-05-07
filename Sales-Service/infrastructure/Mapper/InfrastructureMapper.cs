@@ -1,6 +1,8 @@
 using Sales_Service.domain.Entity;
 using Sales_Service.infrastructure.Entity;
 using System.Collections.Generic;
+using Sales_Service.domain.Entity;
+using Sales_Service.domain;
 
 namespace Sales_Service.infrastructure.Mapper;
 
@@ -16,9 +18,9 @@ public class InfrastructureMapper : IInfrastructureMapper
             OrderDate = domainOrder.OrderDate,
             TotalAmount = domainOrder.TotalAmount,
             BuyerId = domainOrder.BuyerId,
-            PaymentStatus = domainOrder.PaymentStatus,
-            EscrowStatus = domainOrder.EscrowStatus,
-            Version = domainOrder.Version
+            PaymentStatus = domainOrder.PaymentStatus.ToString(),
+            EscrowStatus = domainOrder.EscrowStatus.ToString(),
+          //  Version = domainOrder.Version
         };
     }
 
@@ -44,9 +46,12 @@ public class InfrastructureMapper : IInfrastructureMapper
             OrderDate = orderEntity.OrderDate,
             TotalAmount = orderEntity.TotalAmount,
             BuyerId = orderEntity.BuyerId,
-            PaymentStatus = orderEntity.PaymentStatus,
-            EscrowStatus = orderEntity.EscrowStatus,
-            Version = orderEntity.Version
+            PaymentStatus = string.IsNullOrEmpty(orderEntity.PaymentStatus) 
+                ? OrderPaymentStatus.PENDING 
+                : Enum.Parse<OrderPaymentStatus>(orderEntity.PaymentStatus),
+            EscrowStatus = string.IsNullOrEmpty(orderEntity.EscrowStatus)
+                ? EscrowStatus.PENDING
+                : Enum.Parse<EscrowStatus>(orderEntity.EscrowStatus),
         };
     }
     
@@ -77,6 +82,23 @@ public class InfrastructureMapper : IInfrastructureMapper
             AmountPaid = entity.AmountPaid,
             PaymentDate = entity.PaymentDate,
             Status = entity.Status
+        };
+    }
+    
+    public DomainOrderDetailEntity ToDomainOrderDetail(OrderDetailEntity entity)
+    {
+        if (entity == null) return null!;
+    
+        return new DomainOrderDetailEntity
+        {
+            OrderDetailId = entity.OrderDetailId,
+            OrderId = entity.OrderId,
+            ProductId = entity.ProductId,
+            Quantity = entity.Quantity,
+            UnitPriceAtSale = entity.UnitPriceAtSale,
+            SnapShotTax = entity.SnapShotTax,
+            CommissionAmount = entity.CommissionAmount,
+            SubTotal = entity.SubTotal
         };
     }
 }

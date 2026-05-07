@@ -10,8 +10,8 @@ public class OrderEntity
     public Guid BuyerId { get; set; }
     public DateTime OrderDate { get; set; }
     public decimal TotalAmount { get; set; }
-    public OrderPaymentStatus PaymentStatus { get; set; }
-    public EscrowStatus EscrowStatus { get; set; }
-    public int Version { get; set; }
+    public string PaymentStatus { get; set; }
+    public string EscrowStatus { get; set; }
+    //public int Version { get; set; }
 }
 
